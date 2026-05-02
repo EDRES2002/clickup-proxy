@@ -3,7 +3,14 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-api-key', 'Authorization']
+}));
+
+app.options('*', cors());
 app.use(express.json());
 
 app.get('/team', async (req, res) => {
